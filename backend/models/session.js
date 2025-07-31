@@ -36,6 +36,16 @@ const sessionSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  difficulty: {
+    type: String,
+    enum: ['Beginner', 'Intermediate', 'Advanced'],
+    default: 'Beginner'
+  },
+  colorTheme: {
+    type: String,
+    trim: true,
+    default: '#F0F4F8'
+  },
   status: {
     type: String,
     enum: ['draft', 'published'],
