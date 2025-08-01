@@ -3,10 +3,10 @@ const User = require('../models/user.js')
 
 const auth = async (req, res, next) => {
   try {
-    const authHeader = req.header('Authorization')
+    const authHeader = req.get('authorization') || req.get('Authorization')
 
     if (!authHeader?.startsWith('Bearer ')) {
-      return res.status(401).json({ error: 'No token provided' })
+      return res.status(401).json({ error: 'Token missing' })
     }
 
     const token = authHeader.split(' ')[1]
@@ -25,11 +25,11 @@ const auth = async (req, res, next) => {
     }
 
     if (err.name === 'TokenExpiredError') {
-      return res.status(401).json({ error: 'Token has expired' })
+      return res.status(401).json({ error: 'Expired token' })
     }
 
     console.error('Auth error:', err)
-    res.status(500).json({ error: 'Authentication failed' })
+    res.status(500).json({ error: 'Authentication error' })
   }
 }
 

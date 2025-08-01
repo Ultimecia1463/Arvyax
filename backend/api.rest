@@ -19,6 +19,10 @@ Content-Type: application/json
   "password": "secret123"
 }
 
+### Get My Profile (needs JWT)
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGI5NzVhZWRhZTYxMjNlYzM5MDdhMCIsImlhdCI6MTc1Mzk3ODcxNCwiZXhwIjoxNzU0NTgzNTE0fQ.qiXmNbAulFG2nxk4-zQyvME_fjlnp-lRUhlmoGtVzKY
+
 ### Get My Sessions (needs JWT)
 GET http://localhost:5000/api/sessions/my
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGI5NzVhZWRhZTYxMjNlYzM5MDdhMCIsImlhdCI6MTc1Mzk3ODcxNCwiZXhwIjoxNzU0NTgzNTE0fQ.qiXmNbAulFG2nxk4-zQyvME_fjlnp-lRUhlmoGtVzKY

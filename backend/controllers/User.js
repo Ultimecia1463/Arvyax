@@ -3,7 +3,7 @@ const User = require('../models/user.js')
 
 const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN || '7d'
+    expiresIn: '7d'
   })
 }
 
@@ -15,8 +15,8 @@ const registerUser = async (req, res) => {
       return res.status(400).json({ error: 'Email and password are required' })
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({ error: 'Password must be at least 6 characters' })
+    if (password.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters' })
     }
 
     const exists = await User.findOne({ email })

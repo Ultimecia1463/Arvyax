@@ -11,7 +11,7 @@ const {
 
 const router = express.Router()
 
-router.get('/sessions', getPublicSessions)
+router.get('/sessions/public', getPublicSessions)
 router.get('/sessions/my', auth, getMySessions)
 router.get('/sessions/my/:id', auth, getSessionById)
 router.post('/sessions/draft', auth, saveDraft)

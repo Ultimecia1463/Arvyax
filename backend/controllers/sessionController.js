@@ -2,7 +2,7 @@ const Session = require('../models/session.js')
 
 const safeArray = (value) => (Array.isArray(value) ? value : [])
 
-exports.getPublicSessions = async (req, res) => {
+const getPublicSessions = async (req, res) => {
   try {
     const sessions = await Session.find({ status: 'published' })
       .populate('user_id', 'email')
@@ -10,12 +10,12 @@ exports.getPublicSessions = async (req, res) => {
 
     res.json({ data: { sessions } })
   } catch (err) {
-    console.error('Error fetching public sessions:', err)
-    res.status(500).json({ error: 'Unable to retrieve sessions' })
+    console.error('Error loading public sessions:', err)
+    res.status(500).json({ error: 'Failed to retrieve sessions' })
   }
 }
 
-exports.getMySessions = async (req, res) => {
+const getMySessions = async (req, res) => {
   try {
     const sessions = await Session.find({ user_id: req.user._id })
       .populate('user_id', 'email')
@@ -23,12 +23,12 @@ exports.getMySessions = async (req, res) => {
 
     res.json({ data: { sessions } })
   } catch (err) {
-    console.error('Error fetching user sessions:', err)
-    res.status(500).json({ error: 'Could not fetch sessions' })
+    console.error('Error loading user sessions:', err)
+    res.status(500).json({ error: 'Failed to fetch sessions' })
   }
 }
 
-exports.getSessionById = async (req, res) => {
+const getSessionById = async (req, res) => {
   try {
     const session = await Session.findOne({
       _id: req.params.id,
@@ -41,14 +41,14 @@ exports.getSessionById = async (req, res) => {
 
     res.json({ data: { session } })
   } catch (err) {
-    console.error('Error retrieving session:', err)
-    res.status(500).json({ error: 'Could not retrieve session' })
+    console.error('Error loading session:', err)
+    res.status(500).json({ error: 'Failed to retrieve session' })
   }
 }
 
-exports.saveDraft = async (req, res) => {
+const saveDraft = async (req, res) => {
   try {
-    const { id, title, tags, video_url, thumbnail, description, duration } = req.body
+    const { id, title, tags, video_url, thumbnail, description, duration, difficulty } = req.body
 
     if (!title || !title.trim()) {
       return res.status(400).json({ error: 'Title is required' })
@@ -61,6 +61,7 @@ exports.saveDraft = async (req, res) => {
       thumbnail: thumbnail || '',
       description: description || '',
       duration: duration || '',
+      difficulty: difficulty || 'Beginner',
       status: 'draft'
     }
 
@@ -89,9 +90,9 @@ exports.saveDraft = async (req, res) => {
   }
 }
 
-exports.publishSession = async (req, res) => {
+const publishSession = async (req, res) => {
   try {
-    const { id, title, tags, video_url, thumbnail, description, duration } = req.body
+    const { id, title, tags, video_url, thumbnail, description, duration, difficulty } = req.body
 
     if (!title?.trim()) {
       return res.status(400).json({ error: 'Title is required' })
@@ -112,6 +113,7 @@ exports.publishSession = async (req, res) => {
       thumbnail: thumbnail || '',
       description: description.trim(),
       duration: duration || '',
+      difficulty: difficulty || 'Beginner',
       status: 'published'
     }
 
@@ -140,7 +142,7 @@ exports.publishSession = async (req, res) => {
   }
 }
 
-exports.deleteSession = async (req, res) => {
+const deleteSession = async (req, res) => {
   try {
     const session = await Session.findOneAndDelete({
       _id: req.params.id,
@@ -156,4 +158,13 @@ exports.deleteSession = async (req, res) => {
     console.error('Error deleting session:', err)
     res.status(500).json({ error: 'Failed to delete session' })
   }
+}
+
+module.exports = {
+  getPublicSessions,
+  getMySessions,
+  getSessionById,
+  saveDraft,
+  publishSession,
+  deleteSession
 }
