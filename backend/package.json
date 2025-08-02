@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
-    "build": "rm -rf dist && cd ../frontend && npm i && npm run build && cp -r dist ../backend/dist",
+    "build": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend/dist",
     "lint": "eslint ."
   },
   "keywords": [],
