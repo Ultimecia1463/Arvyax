@@ -5,23 +5,15 @@ const sessionRoutes = require('./routes/sessionRoutes')
 
 const app = express()
 
-const allowedOrigins = [
-  'http://localhost:5173'
-]
-
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
+  origin: true,
   credentials: true
 }))
 
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
+
+app.use(express.static('dist'))
 
 if (process.env.NODE_ENV === 'development') {
   const morgan = require('morgan')
