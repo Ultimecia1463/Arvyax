@@ -41,6 +41,7 @@ const MySessions = () => {
         <div className="mt-25 grid grid-cols-1 lg:grid-cols-2 gap-4">
           {sessions.length === 0 ? (
             <>
+              <h2 className='mt-4 text-4xl text-neutral-content font-bold text-shadow-xs' >You haven’t made any sessions yet..</h2>
               <div className="flex w-full flex-col gap-4">
                 <div className="skeleton h-32 w-full"></div>
                 <div className="skeleton h-4 w-28"></div>
@@ -61,8 +62,6 @@ const MySessions = () => {
                 <div className="skeleton h-4 w-full"></div>
                 <div className="skeleton h-4 w-full"></div>
               </div>
-
-              <h2 className='mt-4 text-4xl text-neutral-content font-bold whitespace-nowrap text-shadow-xs' >You haven’t made any sessions yet..</h2>
             </>
           ) : (
             sessions.map((session) => (

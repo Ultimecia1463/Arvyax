@@ -68,27 +68,31 @@ const DraftEditor = () => {
   useAutoSave(form, handleAutoSave)
 
   return (
-    <div className="min-h-screen min-w-screen bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]">
+    <div className="min-h-screen bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]">
       <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="mt-6 text-3xl font-extrabold font-heading text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+      <div className="max-w-4xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <h1 className="mt-4 text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold font-heading text-gray-900 dark:text-white text-center sm:text-left">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-accent from-primary">
             {id ? 'Edit Session' : 'Create New Session'}
           </span>
         </h1>
-        <form className="space-y-4 mt-25 mx-auto w-2xl fieldset bg-transparent backdrop-blur-[1px] shadow-[0_0_80px_rgba(0,0,0,0.2)] border-base-300 rounded-box border p-4">
+
+        <form className="mt-8 space-y-4 bg-transparent backdrop-blur-[1.5px] shadow-lg border border-base-300 rounded-lg p-4 sm:p-6">
+          {/* Title */}
           <div>
-            <label className="block label text-sm font-medium text-base-content">Title</label>
+            <label className="block text-sm font-medium text-base-content">Title</label>
             <input
               type="text"
               name="title"
               value={form.title}
               onChange={handleChange}
               placeholder="Give your session a clear, catchy title"
-              className="mt-1 block w-full border border-primary rounded-lg shadow-sm px-4 py-2 focus:outline-none focus:ring focus:ring-secondary focus:border-transparent"
+              className="mt-1 w-full border border-primary rounded-lg shadow-sm px-3 sm:px-4 py-2 focus:outline-none focus:ring focus:ring-secondary"
               required
             />
           </div>
+
+          {/* Description */}
           <div>
             <label className="block text-sm font-medium text-base-content">Description</label>
             <textarea
@@ -97,10 +101,12 @@ const DraftEditor = () => {
               onChange={handleChange}
               rows="4"
               placeholder="Write a brief summary of your session"
-              className="mt-1 block w-full border border-primary rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring focus:ring-secondary focus:border-transparent"
+              className="mt-1 w-full border border-primary rounded-lg shadow-sm px-3 sm:px-4 py-2 focus:outline-none focus:ring focus:ring-secondary"
               required
             />
           </div>
+
+          {/* Video URL */}
           <div>
             <label className="block text-sm font-medium text-base-content">Video URL</label>
             <input
@@ -109,22 +115,26 @@ const DraftEditor = () => {
               value={form.video_url}
               onChange={handleChange}
               placeholder="https://example.com"
-              className="mt-1 block w-full border border-primary rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring focus:ring-secondary focus:border-transparent"
+              className="mt-1 w-full border border-primary rounded-lg shadow-sm px-3 sm:px-4 py-2 focus:outline-none focus:ring focus:ring-secondary"
             />
           </div>
+
+          {/* Difficulty */}
           <div>
             <label className="block text-sm font-medium text-base-content">Difficulty</label>
             <select
               name="difficulty"
               value={form.difficulty}
               onChange={handleChange}
-              className="mt-1 block w-full border border-primary rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring focus:ring-secondary focus:border-transparent"
+              className="mt-1 w-full border border-primary rounded-lg shadow-sm px-3 sm:px-4 py-2 focus:outline-none focus:ring focus:ring-secondary"
             >
               <option>Beginner</option>
               <option>Intermediate</option>
               <option>Advanced</option>
             </select>
           </div>
+
+          {/* Tags */}
           <div>
             <label className="block text-sm font-medium text-base-content">Tags</label>
             <input
@@ -132,19 +142,21 @@ const DraftEditor = () => {
               name="tags"
               value={form.tags}
               onChange={handleChange}
-              placeholder="(comma-separated):exercise, relaxation, nutrition, focus "
-              className="mt-1 block w-full border border-primary rounded-md shadow-sm px-4 py-2 focus:outline-none focus:ring focus:ring-secondary focus:border-transparent"
+              placeholder="(comma-separated): exercise, relaxation, nutrition, focus"
+              className="mt-1 w-full border border-primary rounded-lg shadow-sm px-3 sm:px-4 py-2 focus:outline-none focus:ring focus:ring-secondary"
             />
-            <p className="text-sm text-gray-500 mt-2">Separate tags with commas</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-2">Separate tags with commas</p>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm text-base-content/50">
+
+          {/* Actions */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span className="text-sm text-base-content/50 order-2 sm:order-1">
               {saving ? 'Saving...' : 'Autosaves every 10 seconds'}
             </span>
             <button
               type="button"
               onClick={handlePublish}
-              className="btn btn-outline btn-primary transition-all text-sm"
+              className="btn btn-outline btn-primary w-full sm:w-auto order-1 sm:order-2"
             >
               Publish
             </button>

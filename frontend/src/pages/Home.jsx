@@ -31,6 +31,7 @@ const Home = () => {
           {sessions.length === 0 ? (
 
             <>
+              <h2 className='mt-4 text-4xl text-neutral-content font-bold text-shadow-xs' >No Public sessions available..</h2>
               <div className="flex w-full flex-col gap-4">
                 <div className="skeleton h-32 w-full"></div>
                 <div className="skeleton h-4 w-28"></div>
@@ -51,8 +52,6 @@ const Home = () => {
                 <div className="skeleton h-4 w-full"></div>
                 <div className="skeleton h-4 w-full"></div>
               </div>
-
-              <h2 className='mt-4 text-4xl text-neutral-content font-bold whitespace-nowrap text-shadow-xs' >No Public sessions available..</h2>
             </>
 
           ) : (
