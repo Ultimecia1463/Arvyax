@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { sessionAPI } from '../services/api';
+import { sessionAPI } from '../services/sessionAPI';
 import Navigation from '../components/Navigation';
 import SessionCard from '../components/SessionCard';
 import Toast from '../components/Toast';
 
-const Dashboard = () => {
+const Home = () => {
   const [sessions, setSessions] = useState([]);
   const [toast, setToast] = useState(null);
 
@@ -38,4 +38,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;

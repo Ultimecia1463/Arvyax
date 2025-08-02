@@ -6,20 +6,17 @@ const Toast = ({ message, type, onClose }) => {
     return () => clearTimeout(timer);
   }, [onClose]);
 
-  const bgColor =
-    type === 'success'
-      ? 'bg-green-500'
-      : type === 'error'
-      ? 'bg-red-500'
-      : 'bg-blue-500';
-
   return (
-    <div
-      className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 text-white ${bgColor}`}
-    >
-      <div className="flex items-center justify-between gap-4">
+    <div className="toast fixed transition-all duration-300">
+      <div className={`alert ${
+        type === 'success'
+          ? 'alert-success'
+          : type === 'error'
+          ? 'alert-error'
+          : 'alert-info'
+      }`}>
         <span>{message}</span>
-        <button onClick={onClose} className="text-white font-bold text-lg">×</button>
+        <button onClick={onClose} className="font-bold text-lg">×</button>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Toast from '../components/Toast';
-import { sessionAPI } from '../services/api';
+import { sessionAPI } from '../services/sessionAPI';
 import { useAutoSave } from '../hooks/useAutoSave';
 
 const DraftEditor = () => {

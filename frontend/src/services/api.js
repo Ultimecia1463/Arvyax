@@ -1,105 +1,42 @@
-const API_BASE = 'http://localhost:5000';
+import axios from 'axios';
 
-const handleApiResponse = async (response) => {
-  if (!response.ok) {
-    let msg = 'Request failed';
-    try {
-      const data = await response.json();
-      msg = data.error || data.message || `HTTP ${response.status}`;
-    } catch (e) {
-      console.log(e);
-      
-      msg = `HTTP ${response.status} - ${response.statusText}`;
-    }
-    throw new Error(msg);
-  }
-  return response.json();
-};
+export const API_BASE = 'http://localhost:5000';
+
+const api = axios.create({
+  baseURL: API_BASE,
+  headers: { 'Content-Type': 'application/json' },
+  withCredentials: true, 
+});
 
 const getToken = () => JSON.parse(sessionStorage.getItem('user'))?.token;
 
-export const authAPI = {
-  register: async (userData) => {
-    const res = await fetch(`${API_BASE}/api/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    });
-    return handleApiResponse(res);
+api.interceptors.request.use(
+  (config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
   },
+  (error) => Promise.reject(error)
+);
 
-  login: async (userData) => {
-    const res = await fetch(`${API_BASE}/api/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    });
-    return handleApiResponse(res);
-  },
-  
-};
+api.interceptors.response.use(
+  (response) => response.data,
+  (error) => {
+    let msg = 'Request failed';
 
-export const sessionAPI = {
-  getPublicSessions: async () => {
-    const res = await fetch(`${API_BASE}/api/sessions/public`);
-    return handleApiResponse(res).then(data => ({ data: { sessions: data.sessions || [] } }));
-  },
+    if (error.response) {
+      const data = error.response.data;
+      msg = data.error || data.message || `HTTP ${error.response.status}`;
+    } else if (error.request) {
+      msg = 'No response from server';
+    } else {
+      msg = error.message;
+    }
 
-  getMySessions: async () => {
-    const res = await fetch(`${API_BASE}/api/sessions/my`, {
-      headers: {
-        'Authorization': `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    return handleApiResponse(res).then(data => ({ data: { sessions: data.sessions || [] } }));
-  },
+    return Promise.reject(new Error(msg));
+  }
+);
 
-  getMySession: async (id) => {
-    const res = await fetch(`${API_BASE}/api/sessions/my/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    return handleApiResponse(res).then(data => ({ data: { session: data.session } }));
-  },
-
-  saveDraft: async (data) => {
-    const res = await fetch(`${API_BASE}/api/sessions/draft`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ ...data, status: 'draft' }),
-    });
-    return handleApiResponse(res).then(data => ({ data: { session: data.session } }));
-  },
-
-  publishSession: async (data) => {
-    const res = await fetch(`${API_BASE}/api/sessions/publish`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    return handleApiResponse(res);
-  },
-
-  deleteSession: async (id) => {
-    const res = await fetch(`${API_BASE}/api/sessions/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${getToken()}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    await handleApiResponse(res);
-    return { data: { success: true } };
-  },
-};
-
-export { API_BASE };
+export default api;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { sessionAPI } from '../services/api';
+import { sessionAPI } from '../services/sessionAPI';
 import Navigation from '../components/Navigation';
 import SessionCard from '../components/SessionCard';
 import Toast from '../components/Toast';

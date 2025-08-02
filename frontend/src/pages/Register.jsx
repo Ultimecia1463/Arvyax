@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
-import { authAPI } from '../services/api';
+import { authAPI } from '../services/authAPI';
 import Toast from '../components/Toast';
 
 const Register = () => {
@@ -27,9 +27,9 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-pink-500 to-purple-500">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center text-purple-700">Register for Wellness</h2>
+    <div className="min-h-screen flex items-center justify-center bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]">
+      <div className="bg-base-100 p-8 card shadow-lg w-full max-w-md">
+        <h2 className="text-3xl font-bold font-heading mb-6 text-center text-primary">Join Arvyax</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
@@ -38,7 +38,8 @@ const Register = () => {
             value={form.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-2 input focus:outline-none focus:ring focus:ring-primary focus:border-transparent"
+            autoComplete="off"
           />
           <input
             type="password"
@@ -47,18 +48,18 @@ const Register = () => {
             value={form.password}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-2 input focus:outline-none focus:ring focus:ring-primary focus:border-transparent"
           />
           <button
             type="submit"
-            className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition"
+            className="w-full btn btn-soft btn-primary transition text-lg"
           >
             Register
           </button>
         </form>
-        <p className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link to="/login" className="text-purple-600 hover:underline">
+        <p className="mt-4 text-center text-sm text-base-content">
+          Already have an account?
+          <Link to="/login" className="ml-3 link link-primary link-hover">
             Login
           </Link>
         </p>
