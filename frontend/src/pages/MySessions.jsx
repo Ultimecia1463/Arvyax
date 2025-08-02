@@ -32,13 +32,38 @@ const MySessions = () => {
   }, []);
 
   return (
-    <div>
+    <div className='min-h-screen bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]'>
       <Navigation />
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6 text-center text-purple-700">My Sessions</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h1 className="mt-6 text-3xl font-extrabold font-heading text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r to-accent from-primary">My Sessions</span>
+        </h1>
+        <div className="mt-25 grid grid-cols-1 lg:grid-cols-2 gap-4">
           {sessions.length === 0 ? (
-            <p className="text-center col-span-full text-gray-500">You haven't created any sessions yet.</p>
+            <>
+              <div className="flex w-full flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
+              </div>
+
+              <div className="flex w-full flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
+              </div>
+
+              <div className="flex w-full flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
+              </div>
+
+              <h2 className='mt-4 text-4xl text-neutral-content font-bold whitespace-nowrap text-shadow-xs' >You haven’t made any sessions yet..</h2>
+            </>
           ) : (
             sessions.map((session) => (
               <SessionCard key={session._id} session={session} onDelete={handleDelete} />

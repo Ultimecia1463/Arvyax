@@ -23,18 +23,10 @@ const sessionSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
-  thumbnail: {
-    type: String,
-    trim: true
-  },
   description: {
     type: String,
     trim: true,
     maxlength: 1000
-  },
-  duration: {
-    type: String,
-    trim: true
   },
   difficulty: {
     type: String,

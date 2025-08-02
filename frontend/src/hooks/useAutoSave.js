@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-export const useAutoSave = (data, onSave, delay = 5000) => {
+export const useAutoSave = (data, onSave, delay = 10000) => {
   const timeoutRef = useRef();
   const previousDataRef = useRef();
 

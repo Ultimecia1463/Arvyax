@@ -15,8 +15,8 @@ const Toast = ({ message, type, onClose }) => {
           ? 'alert-error'
           : 'alert-info'
       }`}>
-        <span>{message}</span>
-        <button onClick={onClose} className="font-bold text-lg">×</button>
+        <span className='font-heading' >{message}</span>
+        <button onClick={onClose} className="font-extralight text-4xl">×</button>
       </div>
     </div>
   );

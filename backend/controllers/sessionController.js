@@ -48,7 +48,7 @@ const getSessionById = async (req, res) => {
 
 const saveDraft = async (req, res) => {
   try {
-    const { id, title, tags, video_url, thumbnail, description, duration, difficulty } = req.body
+    const { id, title, tags, video_url, description, difficulty } = req.body
 
     if (!title || !title.trim()) {
       return res.status(400).json({ error: 'Title is required' })
@@ -58,9 +58,7 @@ const saveDraft = async (req, res) => {
       title: title.trim(),
       tags: safeArray(tags),
       video_url: video_url || '',
-      thumbnail: thumbnail || '',
       description: description || '',
-      duration: duration || '',
       difficulty: difficulty || 'Beginner',
       status: 'draft'
     }
@@ -92,7 +90,7 @@ const saveDraft = async (req, res) => {
 
 const publishSession = async (req, res) => {
   try {
-    const { id, title, tags, video_url, thumbnail, description, duration, difficulty } = req.body
+    const { id, title, tags, video_url, description, difficulty } = req.body
 
     if (!title?.trim()) {
       return res.status(400).json({ error: 'Title is required' })
@@ -110,9 +108,7 @@ const publishSession = async (req, res) => {
       title: title.trim(),
       tags: safeArray(tags),
       video_url: video_url.trim(),
-      thumbnail: thumbnail || '',
       description: description.trim(),
-      duration: duration || '',
       difficulty: difficulty || 'Beginner',
       status: 'published'
     }
