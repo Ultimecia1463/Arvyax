@@ -24,17 +24,17 @@ const SessionCard = ({ session, onDelete }) => {
               })
             }
             {
-              session.diffculty === "Advanced" ? (
+              session.difficulty === "Advanced" ? (
                 <div className="btn btn-xs btn-error btn-active h-5 text-xs">
-                  {session.diffculty}
+                  {session.difficulty}
                 </div>
-              ) : session.diffculty === "Intermediate" ? (
+              ) : session.difficulty === "Intermediate" ? (
                 <div className="btn btn-xs btn-warning btn-active h-5 text-xs">
-                  {session.diffculty}
+                  {session.difficulty}
                 </div>
               ) : (
                 <div className="btn btn-xs btn-success btn-active h-5 text-xs">
-                  {session.diffculty || "Beginner"}
+                  {session.difficulty || "Beginner"}
                 </div>
               )
             }
