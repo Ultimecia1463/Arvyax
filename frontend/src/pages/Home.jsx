@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { sessionAPI } from '../services/sessionAPI';
-import Navigation from '../components/Navigation';
+import Navbar from '../components/Navbar';
 import SessionCard from '../components/SessionCard';
 import Toast from '../components/Toast';
 
@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <div className='min-h-screen bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]' >
-      <Navigation />
+      <Navbar />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <h1 className="mt-6 text-3xl font-extrabold font-heading text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
           <span className="text-transparent bg-clip-text bg-gradient-to-r to-accent from-primary">Published Sessions</span>

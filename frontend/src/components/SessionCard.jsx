@@ -2,9 +2,6 @@ import { Link } from 'react-router-dom';
 
 const SessionCard = ({ session, onDelete }) => {
 
-  session.tags=["calm","nature","nature","nature","nature"]
-  session.diffculty="Intermediate"
-
   return (
     <div className="bg-transparent backdrop-blur-[0.8px] rounded-lg shadow-[0_0_15px_rgba(0,0,0,0.5)] shadow-gray-400 overflow-hidden hover:shadow-[0_0_35px_rgba(0,0,0,0.5)] hover:scale-102 hover:backdrop-blur-[1.8px] transition-all  duration-300">
       <div className="p-4 flex flex-col w-full h-full">
@@ -37,7 +34,7 @@ const SessionCard = ({ session, onDelete }) => {
                 </div>
               ) : (
                 <div className="btn btn-xs btn-success btn-active h-5 text-xs">
-                  {session.diffculty}
+                  {session.diffculty || "Beginner"}
                 </div>
               )
             }

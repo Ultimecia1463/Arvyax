@@ -5,7 +5,7 @@ export const sessionAPI = {
 
   getMySessions: () => api.get('/api/sessions/my'),
 
-  getMySession: (id) => api.get(`/api/sessions/my/${id}`).then((res) => res.session),
+  getMySession: (id) => api.get(`/api/sessions/my/${id}`).then((res) => res.data.session),
 
   saveDraft: (data) =>
     api.post('/api/sessions/draft', { ...data, status: 'draft' }).then((res) => res.session),
