@@ -10,8 +10,8 @@ const MySessions = () => {
 
   const fetchMySessions = async () => {
     try {
-      const { data } = await sessionAPI.getMySessions();
-      setSessions(data.sessions);
+      const sessions = await sessionAPI.getMySessions();
+      setSessions(sessions);
     } catch (err) {
       setToast({ message: err.message, type: 'error' });
     }

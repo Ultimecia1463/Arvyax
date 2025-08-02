@@ -11,8 +11,8 @@ const Home = () => {
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const { data } = await sessionAPI.getPublicSessions();
-        setSessions(data.sessions);
+        const sessions = await sessionAPI.getPublicSessions();
+        setSessions(sessions);
       } catch (err) {
         setToast({ message: err.message, type: 'error' });
       }

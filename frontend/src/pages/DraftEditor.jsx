@@ -44,7 +44,7 @@ const DraftEditor = () => {
   const handleAutoSave = async (data) => {
     try {
       setSaving(true);
-      await sessionAPI.saveDraft({ ...data, _id: id });
+      await sessionAPI.saveDraft({ ...data, id });
     } catch (err) {
       setToast({ message: 'Autosave failed: ' + err.message, type: 'error' });
     } finally {
@@ -58,7 +58,7 @@ const DraftEditor = () => {
         .split(',')
         .map((tag) => tag.trim())
         .filter((tag) => tag);
-      await sessionAPI.publishSession({ ...form, tags: tagsArray, _id: id });
+      await sessionAPI.publishSession({ ...form, tags: tagsArray, id });
       setToast({ message: 'Session published!', type: 'success' });
     } catch (err) {
       setToast({ message: err.message, type: 'error' });

@@ -1,16 +1,29 @@
 import api from './api.js';
 
 export const sessionAPI = {
-  getPublicSessions: () => api.get('/api/sessions/public'),
+  // Public sessions
+  getPublicSessions: () =>
+    api.get('/api/sessions/public').then(res => res.data.sessions),
 
-  getMySessions: () => api.get('/api/sessions/my'),
+  // All sessions for logged-in user
+  getMySessions: () =>
+    api.get('/api/sessions/my').then(res => res.data.sessions),
 
-  getMySession: (id) => api.get(`/api/sessions/my/${id}`).then((res) => res.data.session),
+  // Single session for logged-in user
+  getMySession: (id) =>
+    api.get(`/api/sessions/my/${id}`).then(res => res.data.session),
 
+  // Save or update draft
   saveDraft: (data) =>
-    api.post('/api/sessions/draft', { ...data, status: 'draft' }).then((res) => res.session),
+    api.post('/api/sessions/draft', { ...data, status: 'draft' })
+      .then(res => res.data.session),
 
-  publishSession: (data) => api.post('/api/sessions/publish', data),
+  // Publish session
+  publishSession: (data) =>
+    api.post('/api/sessions/publish', data)
+      .then(res => res.data.session),
 
-  deleteSession: (id) => api.delete(`/api/sessions/${id}`),
+  // Delete session
+  deleteSession: (id) =>
+    api.delete(`/api/sessions/${id}`).then(res => res.data)
 };
