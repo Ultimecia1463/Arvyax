@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react';
-import { sessionAPI } from '../services/sessionAPI';
-import Navbar from '../components/Navbar';
-import SessionCard from '../components/SessionCard';
-import Toast from '../components/Toast';
+import { useEffect, useState } from 'react'
+import { sessionAPI } from '../services/sessionAPI'
+import Navbar from '../components/Navbar'
+import SessionCard from '../components/SessionCard'
+import Toast from '../components/Toast'
 
 const Home = () => {
-  const [sessions, setSessions] = useState([]);
-  const [toast, setToast] = useState(null);
+  const [sessions, setSessions] = useState([])
+  const [toast, setToast] = useState(null)
 
   useEffect(() => {
     const fetchSessions = async () => {
       try {
-        const sessions = await sessionAPI.getPublicSessions();
-        setSessions(sessions);
+        const sessions = await sessionAPI.getPublicSessions()
+        setSessions(sessions)
       } catch (err) {
-        setToast({ message: err.message, type: 'error' });
+        setToast({ message: err.message, type: 'error' })
       }
-    };
-    fetchSessions();
-  }, []);
+    }
+    fetchSessions()
+  }, [])
 
   return (
     <div className='min-h-screen bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]' >
@@ -62,7 +62,7 @@ const Home = () => {
       </div>
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

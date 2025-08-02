@@ -1,4 +1,4 @@
-import api from './api.js';
+import api from './api.js'
 
 export const sessionAPI = {
   // Public sessions
@@ -26,4 +26,4 @@ export const sessionAPI = {
   // Delete session
   deleteSession: (id) =>
     api.delete(`/api/sessions/${id}`).then(res => res.data)
-};
+}

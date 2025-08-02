@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthProvider';
-import { authAPI } from '../services/authAPI';
-import Toast from '../components/Toast';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthProvider'
+import { authAPI } from '../services/authAPI'
+import Toast from '../components/Toast'
 
 const Login = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [toast, setToast] = useState(null);
+  const [form, setForm] = useState({ email: '', password: '' })
+  const [toast, setToast] = useState(null)
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const { data } = await authAPI.login(form);
-      login(data.token, data.user);
-      navigate('/');
+      const { data } = await authAPI.login(form)
+      login(data.token, data.user)
+      navigate('/')
     } catch (err) {
-      setToast({ message: err.message, type: 'error' });
+      setToast({ message: err.message, type: 'error' })
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]">
@@ -54,7 +54,7 @@ const Login = () => {
             type="submit"
             className="w-full btn btn-soft btn-primary transition text-lg"
           >
-            Login 
+            Login
           </button>
         </form>
         <p className="mt-4 text-center text-sm text-base-content">
@@ -66,7 +66,7 @@ const Login = () => {
       </div>
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

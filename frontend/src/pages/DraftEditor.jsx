@@ -1,71 +1,71 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Toast from '../components/Toast';
-import { sessionAPI } from '../services/sessionAPI';
-import { useAutoSave } from '../hooks/useAutoSave';
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import Toast from '../components/Toast'
+import { sessionAPI } from '../services/sessionAPI'
+import { useAutoSave } from '../hooks/useAutoSave'
 
 const DraftEditor = () => {
-  const { id } = useParams();
+  const { id } = useParams()
   const [form, setForm] = useState({
     title: '',
     description: '',
     video_url: '',
     tags: '',
     difficulty: 'Beginner'
-  });
-  const [toast, setToast] = useState(null);
-  const [saving, setSaving] = useState(false);
+  })
+  const [toast, setToast] = useState(null)
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     const fetchSession = async () => {
-      if (!id) return;
+      if (!id) return
       try {
-        const session = (await sessionAPI.getMySession(id)) || {};
+        const session = (await sessionAPI.getMySession(id)) || {}
         setForm({
           title: session.title || '',
           description: session.description || '',
           video_url: session.video_url || '',
           tags: Array.isArray(session.tags) ? session.tags.join(', ') : '',
           difficulty: session.difficulty || 'Beginner'
-        });
+        })
       } catch (err) {
-        console.error(err);
-        setToast({ message: err.message + ' title error', type: 'error' });
+        console.error(err)
+        setToast({ message: err.message + ' title error', type: 'error' })
       }
-    };
-    fetchSession();
-  }, [id]);
+    }
+    fetchSession()
+  }, [id])
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   const handleAutoSave = async (data) => {
     try {
-      setSaving(true);
-      await sessionAPI.saveDraft({ ...data, id });
+      setSaving(true)
+      await sessionAPI.saveDraft({ ...data, id })
     } catch (err) {
-      setToast({ message: 'Autosave failed: ' + err.message, type: 'error' });
+      setToast({ message: 'Autosave failed: ' + err.message, type: 'error' })
     } finally {
-      setSaving(false);
+      setSaving(false)
     }
-  };
+  }
 
   const handlePublish = async () => {
     try {
       const tagsArray = form.tags
         .split(',')
         .map((tag) => tag.trim())
-        .filter((tag) => tag);
-      await sessionAPI.publishSession({ ...form, tags: tagsArray, id });
-      setToast({ message: 'Session published!', type: 'success' });
+        .filter((tag) => tag)
+      await sessionAPI.publishSession({ ...form, tags: tagsArray, id })
+      setToast({ message: 'Session published!', type: 'success' })
     } catch (err) {
-      setToast({ message: err.message, type: 'error' });
+      setToast({ message: err.message, type: 'error' })
     }
-  };
+  }
 
-  useAutoSave(form, handleAutoSave);
+  useAutoSave(form, handleAutoSave)
 
   return (
     <div className="min-h-screen min-w-screen bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]">
@@ -153,7 +153,7 @@ const DraftEditor = () => {
       </div>
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
     </div>
-  );
-};
+  )
+}
 
-export default DraftEditor;
+export default DraftEditor

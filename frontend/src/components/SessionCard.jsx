@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const SessionCard = ({ session, onDelete }) => {
 
@@ -9,7 +9,7 @@ const SessionCard = ({ session, onDelete }) => {
           {session.title}
           {onDelete && (
             <div className={`btn btn-xs btn-active h-5 ml-2 outline-1 text-[10px] mb-1 ${
-              session.status === "draft" ? "btn-accent" : "btn-success"
+              session.status === 'draft' ? 'btn-accent' : 'btn-success'
             }`}>
               {session.status}
             </div>
@@ -19,22 +19,22 @@ const SessionCard = ({ session, onDelete }) => {
         <div className='mt-auto' >
           <div className='flex flex-row flex-wrap gap-1 mb-3' >
             {
-              session.tags.map((tag)=>{
+              session.tags.map((tag) => {
                 return <div key={Math.random()} className='btn btn-xs btn-secondary btn-active h-5 text-xs' >{tag}</div>
               })
             }
             {
-              session.difficulty === "Advanced" ? (
+              session.difficulty === 'Advanced' ? (
                 <div className="btn btn-xs btn-error btn-active h-5 text-xs">
                   {session.difficulty}
                 </div>
-              ) : session.difficulty === "Intermediate" ? (
+              ) : session.difficulty === 'Intermediate' ? (
                 <div className="btn btn-xs btn-warning btn-active h-5 text-xs">
                   {session.difficulty}
                 </div>
               ) : (
                 <div className="btn btn-xs btn-success btn-active h-5 text-xs">
-                  {session.difficulty || "Beginner"}
+                  {session.difficulty || 'Beginner'}
                 </div>
               )
             }
@@ -71,7 +71,7 @@ const SessionCard = ({ session, onDelete }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SessionCard;
+export default SessionCard

@@ -1,30 +1,30 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthProvider';
-import { authAPI } from '../services/authAPI';
-import Toast from '../components/Toast';
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthProvider'
+import { authAPI } from '../services/authAPI'
+import Toast from '../components/Toast'
 
 const Register = () => {
-  const navigate = useNavigate();
-  const { login } = useAuth();
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [toast, setToast] = useState(null);
+  const [form, setForm] = useState({ email: '', password: '' })
+  const [toast, setToast] = useState(null)
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const { data } = await authAPI.register(form);
-      login(data.token, data.user);
-      navigate('/');
+      const { data } = await authAPI.register(form)
+      login(data.token, data.user)
+      navigate('/')
     } catch (err) {
-      setToast({ message: err.message, type: 'error' });
+      setToast({ message: err.message, type: 'error' })
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200 bg-[radial-gradient(#b5b8bd_1px,transparent_1px)] [background-size:16px_16px]">
@@ -66,7 +66,7 @@ const Register = () => {
       </div>
       {toast && <Toast {...toast} onClose={() => setToast(null)} />}
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
