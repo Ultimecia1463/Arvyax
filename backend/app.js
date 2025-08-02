@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const authRoutes = require('./routes/authRoutes')
 const sessionRoutes = require('./routes/sessionRoutes')
+const path = require('path')
 
 const app = express()
 
@@ -28,6 +29,9 @@ app.get('/health', (req, res) => {
     message: 'Arvyax API is running',
     timestamp: new Date().toISOString()
   })
+})
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '/dist', 'index.html'))
 })
 
 const unknownEndpoint = (req, res) => {
